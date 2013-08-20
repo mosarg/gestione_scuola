@@ -2,7 +2,6 @@ BeautifulSoup==3.2.1
 CherryPy==3.2.2
 Django==1.5.1
 Fabric==1.7.0
-Landscape-Client==12.12
 Markdown==2.2.1
 MySQL-python==1.2.3
 PAM==0.4.2
@@ -48,7 +47,6 @@ pyserial==2.6
 pysqlite==2.6.3
 python-apt==0.8.8ubuntu6
 python-dateutil==1.5
-python-debian==0.1.21-nmu2ubuntu1
 pytz==2013b
 pyudev==0.16.1
 pyxdg==0.25
@@ -57,10 +55,8 @@ repoze.lru==0.5
 requests==1.1.0
 six==1.2.0
 ssh-import-id==3.14
-synaptiks==0.8.1
 uTidylib==0.2
 urllib3==1.5
 wsgiref==0.1.2
 xdiagnose==3.5.1
 xkit==0.0.0
-zope.interface==4.0.5
