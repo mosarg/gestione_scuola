@@ -10,6 +10,7 @@ class SysUser(TimeStampedModel):
     surname = models.CharField(max_length=100)
     origin = models.CharField(max_length=45, default='automatic')
     insertOrder = models.IntegerField(default=0)
+    syncModel=models.CharField(max_length=30,default='sync')
 
     def __unicode__(self):
         return self.name+' '+self.surname
