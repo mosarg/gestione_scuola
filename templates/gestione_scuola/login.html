@@ -1,0 +1,22 @@
+{% extends 'gestione_scuola/base.html' %}
+
+
+{% block body_content %}
+    <div class="container">
+        <form class="form-signin" name="LoginForm" action="/login/" method="post">
+            <h2 class="form-signin-heading">Log in</h2>
+            {% csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+            {% endif %}
+           <input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus>
+           <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+
+
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div>
+{% endblock %}

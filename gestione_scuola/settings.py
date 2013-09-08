@@ -1,3 +1,19 @@
+import os
+from fabric.api import env
+
+import djcelery
+djcelery.setup_loader()
+
+env.skip_bad_hosts = True
+env.warn_only = True
+
+
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+CELERY_RESULT_BACKEND = "amqp"
+
+PROJECT_DIR = os.path.dirname(__file__)
+
 # Django settings for gestione_scuola project.
 
 DEBUG = True
@@ -28,7 +44,7 @@ ALLOWED_HOSTS = []
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
+# In a Windows environment this must be set to your management time zone.
 TIME_ZONE = 'Europe/Rome'
 
 # Language code for this installation. All choices can be found here:
@@ -67,8 +83,15 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+
+
+
+
 # Additional locations of static files
 STATICFILES_DIRS = (
+     os.path.join(PROJECT_DIR, '../static'),
+
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -91,6 +114,12 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+
+SESSION_COOKIE_AGE=30*60
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -131,10 +160,13 @@ INSTALLED_APPS = (
     'group',
     'backend',
     'configuration',
+    'braces',
+    'djfrontend',
+    'djcelery',
 
 )
 
-# A sample logging configuration. The only tangible logging
+# A sample  logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
@@ -162,6 +194,8 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL='/login/'
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 

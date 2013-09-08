@@ -1,0 +1,15 @@
+{% extends "gestione_scuola/base.html" %}
+
+
+
+{% block body_content %}
+<h1>{{ sysuser.sidiId }}</h1>
+<p>{{ sysuser.name }} {{ sysuser.surname }}</p>
+
+
+<ul>
+{%for account in sysuser.accounts.all %}
+    <li>{{ account.backendId.kind }} {{ account.active }}</li>
+{% endfor %}
+</ul>
+{%  endblock %}

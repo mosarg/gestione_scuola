@@ -2,7 +2,7 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from sysuser.models import SysUser
 from backend.models import Backend
-from allocation.models import Role
+from account.tasks.generic import runFabricTask
 
 
 class Policy(TimeStampedModel):
@@ -24,15 +24,24 @@ class Account(TimeStampedModel):
     username = models.CharField(max_length=30)
     active = models.BooleanField(default=False)
     backendUidNumber = models.IntegerField(default=0)
-    userId = models.ForeignKey(SysUser)
-    backendId = models.ForeignKey(Backend)
+    userId = models.ForeignKey(SysUser,related_name='accounts')
+    backendId = models.ForeignKey(Backend,related_name='accounts')
     policy = models.ManyToManyField(Policy, through='AssignedPolicy')
+
 
     class Meta:
         unique_together = ("userId", "backendId")
 
     def __unicode__(self):
         return self.username
+#
+    def changeBackendPassword(self, password):
+        backend=self.backendId.kind
+        runFabricTask.delay('account.tasks.'+backend,'passwd','root@'+self.backendId.serverFqdn, self.username, password)
+        pass
+
+
+
 
 
 class AssignedPolicy(TimeStampedModel):

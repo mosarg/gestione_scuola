@@ -1,6 +1,7 @@
-try:
-    from django.conf.urls import *
-except ImportError:  # django < 1.4
-    from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url
+from account.views import PasswordChangeView
+
 
 # place app url patterns here
+urlpatterns = patterns('',
+     url(regex=r"passwd$",view=PasswordChangeView.as_view(),name="password" ),)

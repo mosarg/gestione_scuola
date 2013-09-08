@@ -1,0 +1,10 @@
+{% extends 'gestione_scuola/base.html' %}
+
+{% block form_contant %}
+ <div class="container">
+        <form class="form-signin" name="PasswordForm" action="/user/account" method="post">{% csrf_token %}
+             {{ form.as_p }}
+             <button class="btn btn-lg btn-primary btn-block" type="submit">Cambia password</button>
+        </form>
+</div>
+{% endblock %}
