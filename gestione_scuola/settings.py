@@ -163,6 +163,7 @@ INSTALLED_APPS = (
     'braces',
     'djfrontend',
     'djcelery',
+    'gunicorn',
 
 )
 
