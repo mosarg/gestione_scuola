@@ -1,41 +1,24 @@
 import os
 from fabric.api import env
-
 import djcelery
+
 djcelery.setup_loader()
 
 env.skip_bad_hosts = True
 env.warn_only = True
 
-
-
-BROKER_URL = 'amqp://guest:guest@localhost:5672/'
-CELERY_RESULT_BACKEND = "amqp"
-
 PROJECT_DIR = os.path.dirname(__file__)
 
 # Django settings for gestione_scuola project.
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     ('Matteo Mosangini', 'mosarg@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'gestione_scuola',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'mosa',
-        'PASSWORD': 'sambackett',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
