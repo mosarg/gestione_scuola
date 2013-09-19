@@ -43,9 +43,6 @@ gettext = lambda x: x
 
 LANGUAGE_CODE = 'it-IT'
 
-LANGUAGES = (
-    ('it', gettext('Italian')),
-)
 
 
 SITE_ID = 1
