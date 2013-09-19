@@ -1,5 +1,10 @@
 from .base import *
 
+DEBUG = False
+TEMPLATE_DEBUG = False
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 CELERY_RESULT_BACKEND = "amqp"
 
@@ -15,4 +20,5 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default.
     }
 }
+
 
