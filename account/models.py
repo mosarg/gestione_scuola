@@ -37,7 +37,7 @@ class Account(TimeStampedModel):
 #
     def changeBackendPassword(self, password):
         backend=self.backendId.kind
-        runFabricTask.delay('account.tasks.'+backend,'passwd','root@'+self.backendId.serverFqdn, self.username, password)
+        runFabricTask.delay('account.tasks.'+backend+'_tasks','passwd','root@'+self.backendId.serverFqdn, self.username, password)
         pass
 
 

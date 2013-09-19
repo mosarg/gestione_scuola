@@ -1,0 +1,19 @@
+div.user_links{
+    float:left;
+    height:3em;
+    background:#252525;
+    width:100%;
+    margin-bottom: 3em;
+}
+
+div.user_links a{
+    display:block;
+    color:white;
+    font-weight: bold;
+    float:right;
+    padding:0.5em;
+}
+
+div.user_links a:hover{
+    color:#92D1EE;
+}

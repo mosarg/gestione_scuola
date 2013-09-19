@@ -5,10 +5,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^main/$', 'gestione_scuola.views.main'),
+    url(r'^$', 'gestione_scuola.views.main'),
     url(r'^login/$', 'gestione_scuola.views.login_user', name='login'),
-    # url(r'^gestione_scuola/', include('gestione_scuola.foo.urls')),
-
+    url(r'^logout/$', 'gestione_scuola.views.logout', name='logout'),
     url(r'^user/',include('sysuser.urls')),
     url(r'^account/',include('account.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

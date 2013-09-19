@@ -30,9 +30,23 @@ ALLOWED_HOSTS = []
 # In a Windows environment this must be set to your management time zone.
 TIME_ZONE = 'Europe/Rome'
 
+
+
+
+
+
+
+
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'it-it'
+gettext = lambda x: x
+
+LANGUAGE_CODE = 'it-IT'
+
+LANGUAGES = (
+    ('it', gettext('Italian')),
+)
+
 
 SITE_ID = 1
 
@@ -65,9 +79,6 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
-
-
-
 
 
 # Additional locations of static files
@@ -129,10 +140,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'suit',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'sysuser',
     'south',
@@ -145,6 +154,8 @@ INSTALLED_APPS = (
     'configuration',
     'braces',
     'djfrontend',
+    'djfrontend.skeleton',
+    'bootstrapform',
     'djcelery',
     'gunicorn',
 

@@ -1,0 +1,26 @@
+{% extends 'gestione_scuola/extra.html' %}
+{% load staticfiles %}
+
+
+{% block head_js %}
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block body_content %}
+     {{ block.super }}
+        {% block form_content %}
+        {% endblock %}
+{% endblock %}
+
+
+
+
+{% block head_css %}
+{{ block.super }}
+
+ <link href="{% static "gestione_scuola/login.css" %}" rel="stylesheet">
+ <link href="{% static "gestione_scuola/user_links.css" %}" rel="stylesheet">
+{% endblock %}

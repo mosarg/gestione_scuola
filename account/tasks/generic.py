@@ -11,15 +11,15 @@ def string_import(name):
 
 @celery.task()
 def runFabricTask(module, task, host_string, *args,**kwargs):
+    result="fail"
     try:
-
        fabricTask=getattr(string_import(module), task)
        fabricTask.hosts=host_string
        result = execute(fabricTask, *args,**kwargs)
        if isinstance(result.get(host_string, None), BaseException):
           raise result.get(host_string)
     except Exception as e:
-        print "my_celery_task -- %s" % e.message
+        print "my_celery_task -- %s" % e.args
     return result
 
 
