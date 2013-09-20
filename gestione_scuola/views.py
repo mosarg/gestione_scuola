@@ -59,12 +59,6 @@ def logout(request, next_page=None,
 
 
 
-
-
-
-
-
-
 @login_required(login_url='/login/')
 def home(request):
     return HttpResponse("Project Home Implement")

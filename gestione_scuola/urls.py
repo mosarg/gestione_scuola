@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^$', 'gestione_scuola.views.main'),
+    url(r'^$', 'sysuser.views.password_change'),
     url(r'^login/$', 'gestione_scuola.views.login_user', name='login'),
     url(r'^logout/$', 'gestione_scuola.views.logout', name='logout'),
     url(r'^user/',include('sysuser.urls')),
