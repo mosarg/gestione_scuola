@@ -1,0 +1,13 @@
+#!/bin/bash
+
+NAME="gestione_scuola"                                 
+DJANGODIR=/home/apps/webapps/$NAME             
+DJANGO_SETTINGS_MODULE=$NAME.settings.production   
+VIRTUALENV=/home/apps/.virtualenvs/$NAME
+
+source $VIRTUALENV/bin/activate
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$VIRTUALENV:$PYTHONPATH
+
+
+$VIRTUALENV/bin/python $DJANGODIR/manage.py celery worker --loglevel=INFO

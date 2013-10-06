@@ -1,0 +1,32 @@
+#!/bin/bash
+
+NAME="gestione_scuola"                                 
+DJANGODIR=/home/apps/webapps/$NAME             
+VIRTUALENV=/home/apps/.virtualenvs/$NAME
+SOCKFILE=/home/apps/webapps/run/gunicorn_$NAME.sock 
+USER=apps                                        
+GROUP=apps                                      
+NUM_WORKERS=3                                     
+DJANGO_SETTINGS_MODULE=$NAME.settings.production
+DJANGO_WSGI_MODULE=$NAME.wsgi                     
+
+echo "Starting $NAME"
+
+# Activate the virtual environment
+cd $DJANGODIR
+source $VIRTUALENV/bin/activate
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=$VIRTUALENV:$PYTHONPATH
+
+# Create the run directory if it doesn't exist
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Start your Django Unicorn
+# Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
+exec python $DJANGODIR/manage.py run_gunicorn  \
+  --name $NAME \
+  --workers $NUM_WORKERS \
+  --user=$USER --group=$GROUP \
+  --log-level=debug \
+  --bind=unix:$SOCKFILE
