@@ -5,12 +5,10 @@ from backend.models import Backend
 from .models import SysUser
 
 class SetPasswordForm(forms.Form):
-    """
-    A form that lets a user change set his/her password without entering the
-    old password
-    """
+
     error_messages = {
         'password_mismatch': "Errore: le due password non sono uguali",
+        'password_to_short': "Errore: lunghezza minima password 6 caratteri"
     }
     new_password1 = forms.CharField(label="New password",
                                     widget=forms.PasswordInput)
@@ -28,6 +26,9 @@ class SetPasswordForm(forms.Form):
             if password1 != password2:
                 raise forms.ValidationError(
                     self.error_messages['password_mismatch'])
+            if len(password1)<6:
+                raise forms.ValidationError(
+                    self.error_messages['password_to_short'])
         return password2
 
     def save(self, commit=True):
@@ -44,10 +45,7 @@ class SetPasswordForm(forms.Form):
 
 
 class PasswordChangeForm(SetPasswordForm):
-    """
-    A form that lets a user change his/her password by entering
-    their old password.
-    """
+
     error_messages = dict(SetPasswordForm.error_messages, **{
         'password_incorrect': "Vecchia password non corretta. "
                                 "Inseriscila nuovamente",
@@ -56,9 +54,7 @@ class PasswordChangeForm(SetPasswordForm):
                                    widget=forms.PasswordInput)
 
     def clean_old_password(self):
-        """
-        Validates that the old_password field is correct.
-        """
+
         old_password = self.cleaned_data["old_password"]
         if not self.user.check_password(old_password):
             raise forms.ValidationError(
